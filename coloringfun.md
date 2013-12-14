@@ -17,7 +17,7 @@ Besides entertainment, the app provides educational value by spelling out the na
 
 By using the Coloring Fun app, your kid will be able to create master pieces that they will be proud of! They will also improve their spelling while they are having fun painting!
 
-<a href="https://itunes.apple.com/us/app/coloring-fun/id309142123?mt=8"><img src="/images/coloringfun/App_Store_badge.png" width="180" height="120"/></a>
+<a href="https://itunes.apple.com/us/app/coloring-fun/id309142123?mt=8"><img src="/images/App_Store_badge.png" width="180" height="120"/></a>
 
 ### Features
 * Gallery screen – see all images in colored form
