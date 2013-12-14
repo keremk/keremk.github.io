@@ -30,8 +30,8 @@ By using the Coloring Fun app, your kid will be able to create master pieces tha
 * Store images in the photo gallery. Also visit the photo gallery from the app to verify the images stored.
 
 ### Screenshots
-<img src="/images/coloringfun/boat.jpg" width="89" height="128" />
-<img src="/images/coloringfun/cat.jpg" width="89" height="128" />
-<img src="/images/coloringfun/gallery.jpg" width="89" height="128" />
-<img src="/images/coloringfun/giraffe.jpg" width="89" height="128" />
-<img src="/images/coloringfun/snowman.jpg" width="89" height="128" />
+<img src="/images/boat.jpg" width="89" height="128" />
+<img src="/images/cat.jpg" width="89" height="128" />
+<img src="/images/gallery.jpg" width="89" height="128" />
+<img src="/images/giraffe.jpg" width="89" height="128" />
+<img src="/images/snowman.jpg" width="89" height="128" />
