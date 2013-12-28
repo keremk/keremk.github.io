@@ -45,13 +45,13 @@ Let's say, you have a simple Hello World script like below in file ```hello_worl
 Then if you open up your ipython shell, and call the magic command ```%run hello_world.py```, you will stop at the breakpoint you defined on line 5:
 
 ```
-    In [5]: %run hello_world.py
+      In [5]: %run hello_world.py
 
-    > /Users/foo/PyTest/hello_world.py(5)<module>()
+      > /Users/foo/PyTest/hello_world.py(5)<module>()
 
-          3 output = "Hello World"
-          4 breakpoint()
-    ----> 5 print output
+            3 output = "Hello World"
+            4 breakpoint()
+      ----> 5 print output
 ```
 
 To learn more about iPython, you can read the [tutorial](http://ipython.org/ipython-doc/dev/interactive/tutorial.html) on the official iPython site.
