@@ -5,7 +5,7 @@ title:
 tags: [ActiveX, CMS, NCompass, Kerem Karatal, Coding Ventures]
 modified: 2013-12-08
 image:
-  feature: phuket.jpg
+  feature: phi-phi-island.jpg
   credit: Kerem Karatal
 ---
 

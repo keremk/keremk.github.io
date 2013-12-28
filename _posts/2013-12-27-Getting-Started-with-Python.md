@@ -6,7 +6,7 @@ modified: 2013-12-27
 category: articles
 tags: [python, ipython, repl, pandas, data science]
 image:
-  feature: ball-python.jpg
+  feature: ball-python-image.jpg
   credit: Ball Python
   creditlink: http://www.ballpythonaddiction.com/
 comments: true  

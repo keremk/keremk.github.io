@@ -5,7 +5,7 @@ title:
 tags: [iOS, iPhone, Coloring Fun, coloring]
 modified: 2013-09-13
 image:
-  feature: tokyo_meal.jpg
+  feature: tokyo-meal.jpg
   credit: Kerem Karatal
 ---
 
