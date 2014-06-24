@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dating with Swift
+title: Dating Swift
 description: "Using Swift to create more usable Date APIs that are reminiscent of Ruby's ActiveSupport Date APIs."
 modified: 2014-06-22
 category: articles
