@@ -42,27 +42,59 @@ returns today's date. Let's try and calculate
 
 If we use a similar extension to the above ```Int``` extension, unfortunately we will not be taking into account the correct number of days in a month for the last 2 months. Our months extension will just assume that every month is 30 days, and return the number of seconds for 30 days. And then if we just use the ```dateByAddingTimeInterval``` method on ```NSDate```, we won't get our expected result. To solve this problem, as you know from the Cocoa APIs, we need to use ```NSDateComponents``` and explicitly indicate that we are subtracting months. In order to do that, we need to differentiate between one month worth of seconds vs. thirty day worth of seconds. Type system comes to the rescue:
 
-Let's introduce simple new type called Month:
+Let's introduce simple new type called TimeInterval:
 
-      struct Month {
-        var month: Int
-      } 
-
-
-With that we can now change our extension to ```Int``` to return months instead:
-
-      extension Int {
-        var months: Month {
-          return Months(month: self);
+      struct TimeInterval {
+        var interval: Int
+        var unit: TimeIntervalUnit
+                
+        init(interval: Int, unit: TimeIntervalUnit) {
+          self.interval = interval
+          self.unit = unit
         }
       }
 
-And now with that we can create a new operator overload for dates to take Month:
+where the TimeIntervalUnit is the below enumeration:
 
-      @infix func - (let left:NSDate, let right:Month) -> NSDate {
+      enum TimeIntervalUnit {
+        case Seconds, Minutes, Hours, Days, Months, Years
+        
+        func dateComponents(interval: Int) -> NSDateComponents {
+          var components:NSDateComponents = NSDateComponents()
+
+          switch (self) {
+            case .Seconds:
+              components.second = interval
+            case .Minutes:
+              components.minute = interval
+            case .Days:
+              components.day = interval
+            case .Months:
+              components.month = interval
+            case .Years:
+              components.year = interval
+            default:
+              components.day = interval
+          }
+          return components
+        }
+      }
+
+Notice how we can add functions to enumerations! In this case our function simply creates an ```NSDateComponents``` object and maps enumerations to the ```NSDateComponent``` types.
+
+With that we can now change our extension to ```Int``` to return ```TimeInterval``` instead of the ```NSTimeInterval``` :
+
+      extension Int {
+        var months: TimeInterval {
+          return TimeInterval(interval: self, unit: TimeIntervalUnit.Months);
+        }
+      }
+
+And now with that we can create a new operator overload for dates to take ```TimeInterval``` as the right operand:
+
+      @infix func - (let left:NSDate, let right:TimeInterval) -> NSDate {
         var calendar = NSCalendar.currentCalendar()
-        var components:NSDateComponents = NSDateComponents()
-        components.month = -right.month
+        var components = right.unit.dateComponents(-right.interval)
         return calendar.dateByAddingComponents(components, toDate: left, options: nil)
       }
 
@@ -74,16 +106,22 @@ Well now that we have a strong type called Month, wouldn't it be great if we can
 
       var twoMonthsAgo = 2.months.ago
 
-And of course, it is doable as well:
+And of course, it is doable as well, lets go back to TimeInterval:
 
-      struct Month {
-        var month: Int
+      struct TimeInterval {
+        var interval: Int
+        var unit: TimeIntervalUnit
+        
         var ago: NSDate {
           var calendar = NSCalendar.currentCalendar()
           let today = NSDate.date()
-          var components:NSDateComponents = NSDateComponents()
-          components.month = -self.month
+          var components = unit.dateComponents(-self.interval)
           return calendar.dateByAddingComponents(components, toDate: today!, options: nil)
+        }
+        
+        init(interval: Int, unit: TimeIntervalUnit) {
+          self.interval = interval
+          self.unit = unit
         }
       }
 
@@ -100,7 +138,7 @@ Cocoa also has very verbose APIs to compare 2 dates with each other, and this pr
         return isEarlier
       } 
 
-So now this is much better and more readable (at least in my opinion) than using the NSOrderAscending, NSOrderDescending stuff...
+So now this is much better and more readable (at least in my opinion) than using the ```NSOrderAscending```, ```NSOrderDescending``` stuff...
 
       var lastMonth = NSDate.date() - 1.months
       if (lastMonth < NSDate.date()) {
@@ -109,19 +147,13 @@ So now this is much better and more readable (at least in my opinion) than using
 
 ## Simple date helpers
 
-While we are at it, wouldn't it be great to introduce quick helpers for well known colloquial date accessors, like yesterday, last week, tomorrow etc.? That is also easy, let's see how we can build out yesterday:
-
-      @infix func - (let left:NSDate, let right:NSTimeInterval) -> NSDate {
-        return left.dateByAddingTimeInterval(-right)
-      }
-
-Here we will be adding a class function instead of an instance one to the ```NSDate```
+While we are at it, wouldn't it be great to introduce quick helpers for well known colloquial date accessors, like yesterday, last week, tomorrow etc.? That is also easy, let's see how we can build out yesterday. Here we will be adding a class function instead of an instance one to the ```NSDate```
 
       extension NSDate {
         class func yesterday() -> NSDate {
           return NSDate.date() - 1.days
         }
-      }
+      } 
 
 And voila! 
 
