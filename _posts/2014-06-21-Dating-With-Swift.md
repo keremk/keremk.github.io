@@ -232,4 +232,6 @@ And here is a controversial (may be going too far with operator overloading) but
 
 In short, Swift gives us a very expressive set of language tools to create concise and useful APIs. The current Cocoa API set is not yet making use of these language features. So using APIs like NSDate out-of-the-box is still a pain in the ass. But the good news is, building your own wrappers on top of the existing Cocoa APIs is very easy and a lot fun. Apple will probably introduce more native Swift APIs (probably starting with Foundation APIs) in the next year. But in the meantime, we can build our own with very little effort as well.
 
+You can access the full playground for this a [gist here](https://gist.github.com/keremk/c6da4c24953eb66f21b2).
+
 Have fun!
